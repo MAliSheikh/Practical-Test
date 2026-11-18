@@ -43,6 +43,8 @@ ai-link-analysis/
 ├── tests/
 │   └── test_link_analysis.py    # Tests run without internet or API keys
 ├── start.bat                    # Windows setup, test, and launch helper
+├── screenshot/                  # Swagger, API, validation, and test evidence
+│   └── response_1794988467405.json # Full successful Swagger response
 ├── .env.example
 ├── requirements.txt
 └── README.md
@@ -175,7 +177,7 @@ curl -X POST http://localhost:4000/link-analysis \
 
 **Response (shape - shortened)**
 
-> Replace this with a REAL response from your own run before you submit. Save full real outputs in a `samples/` folder.
+This is a shortened example of the response shape. The complete successful response captured from Swagger is available at [screenshot/response_1794988467405.json](screenshot/response_1794988467405.json).
 
 ```json
 {
@@ -398,4 +400,13 @@ Claude Haiku 5.5 is a lower-cost candidate at this request size, but it is not c
 
 ## 9. Screenshots / Logs
 
-_Add here:_ Swagger docs page, one successful response, one error response, and `pytest` passing.
+Evidence from a local run is saved in [`screenshot/`](screenshot/):
+
+| File | Evidence |
+|---|---|
+| [01-test-passed.png](screenshot/01-test-passed.png) | Automated tests passed |
+| [02-api-logs.png](screenshot/02-api-logs.png) | API server logs |
+| [03-request-swaager.png](screenshot/03-request-swaager.png) | Swagger request |
+| [04.1-resposne-swagger.png](screenshot/04.1-resposne-swagger.png)–[04.6-resposne-swagger.png](screenshot/04.6-resposne-swagger.png) | Successful Swagger response, split across screenshots |
+| [05-linkvalidation-error.png](screenshot/05-linkvalidation-error.png) | URL validation error response |
+| [response_1794988467405.json](screenshot/response_1794988467405.json) | Complete successful response in JSON format |
