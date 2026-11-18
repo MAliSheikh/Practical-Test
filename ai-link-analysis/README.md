@@ -12,16 +12,16 @@ A FastAPI app that reads a website, sends the cleaned content to an LLM (Large L
 
 ## 1. Tech Stack
 
-| Part | Tool |
-|---|---|
-| Language | Python 3.10+ |
-| API (Application Programming Interface) framework | FastAPI + Uvicorn |
-| Data validation | Pydantic v2 |
-| HTTP (HyperText Transfer Protocol) client | HTTPX (async) |
-| HTML (HyperText Markup Language) parser | BeautifulSoup |
-| JavaScript-rendered websites | Playwright + Chromium fallback |
-| LLM | Google Gemini (default), Anthropic Claude or OpenAI - change in `.env` |
-| Tests | Pytest |
+| Part                                              | Tool                                                                   |
+| ------------------------------------------------- | ---------------------------------------------------------------------- |
+| Language                                          | Python 3.10+                                                           |
+| API (Application Programming Interface) framework | FastAPI + Uvicorn                                                      |
+| Data validation                                   | Pydantic v2                                                            |
+| HTTP (HyperText Transfer Protocol) client         | HTTPX (async)                                                          |
+| HTML (HyperText Markup Language) parser           | BeautifulSoup                                                          |
+| JavaScript-rendered websites                      | Playwright + Chromium fallback                                         |
+| LLM                                               | Google Gemini (default), Anthropic Claude or OpenAI - change in `.env` |
+| Tests                                             | Pytest                                                                 |
 
 ---
 
@@ -81,7 +81,7 @@ Claude fallback is optional. When you do not have an Anthropic API key, leave `L
 
 ```bash
 # 1. Get the code
-git clone https://github.com/<your-username>/ai-link-analysis.git
+git clone https://github.com/MAliSheikh/Practical-Test.git
 cd ai-link-analysis
 
 # 2. Create a virtual environment (venv)
@@ -105,29 +105,29 @@ GEMINI_API_KEY=your-key-here
 
 Configure the provider and optional fallback in `.env`. A provider's API key is required when that provider is enabled.
 
-| Variable | Purpose |
-|---|---|
-| `LLM_PROVIDER` | Main provider: `gemini`, `anthropic`, or `openai` |
-| `LLM_MODEL` | Model name for the main provider |
-| `LLM_FALLBACK_PROVIDER` | Optional fallback provider; leave empty to disable |
-| `LLM_FALLBACK_MODEL` | Model name for the fallback provider |
-| `GEMINI_API_KEY` | Gemini API key |
-| `ANTHROPIC_API_KEY` | Anthropic API key |
-| `OPENAI_API_KEY` | OpenAI API key |
-| `GEMINI_API_URL_TEMPLATE` | Gemini endpoint template; `{model}` is replaced with `LLM_MODEL` |
-| `ANTHROPIC_API_URL` | Anthropic Messages API endpoint |
-| `OPENAI_API_URL` | OpenAI Chat Completions API endpoint |
-| `GEMINI_THINKING_BUDGET` | Gemini 2.5 thinking budget; `0` disables thinking |
-| `OPENAI_REASONING_EFFORT` | Optional OpenAI reasoning effort |
-| `FETCH_TIMEOUT_SECONDS` | Website request timeout |
-| `JS_RENDER_TIMEOUT_SECONDS` | Maximum time allowed for browser rendering of a JavaScript page |
-| `MAX_PAGE_BYTES` | Maximum bytes read from each page |
-| `MAX_REDIRECTS` | Maximum website redirects to follow |
-| `MAX_EXTRA_PAGES` | Maximum helpful inner pages to fetch |
-| `MAX_CONTENT_CHARS` | Maximum website text sent to the model |
-| `LLM_TIMEOUT_SECONDS` | Model request timeout |
-| `MAX_OUTPUT_TOKENS` | Maximum model output tokens |
-| `CACHE_TTL_SECONDS` | Analysis cache lifetime; `0` disables caching |
+| Variable                    | Purpose                                                          |
+| --------------------------- | ---------------------------------------------------------------- |
+| `LLM_PROVIDER`              | Main provider: `gemini`, `anthropic`, or `openai`                |
+| `LLM_MODEL`                 | Model name for the main provider                                 |
+| `LLM_FALLBACK_PROVIDER`     | Optional fallback provider; leave empty to disable               |
+| `LLM_FALLBACK_MODEL`        | Model name for the fallback provider                             |
+| `GEMINI_API_KEY`            | Gemini API key                                                   |
+| `ANTHROPIC_API_KEY`         | Anthropic API key                                                |
+| `OPENAI_API_KEY`            | OpenAI API key                                                   |
+| `GEMINI_API_URL_TEMPLATE`   | Gemini endpoint template; `{model}` is replaced with `LLM_MODEL` |
+| `ANTHROPIC_API_URL`         | Anthropic Messages API endpoint                                  |
+| `OPENAI_API_URL`            | OpenAI Chat Completions API endpoint                             |
+| `GEMINI_THINKING_BUDGET`    | Gemini 2.5 thinking budget; `0` disables thinking                |
+| `OPENAI_REASONING_EFFORT`   | Optional OpenAI reasoning effort                                 |
+| `FETCH_TIMEOUT_SECONDS`     | Website request timeout                                          |
+| `JS_RENDER_TIMEOUT_SECONDS` | Maximum time allowed for browser rendering of a JavaScript page  |
+| `MAX_PAGE_BYTES`            | Maximum bytes read from each page                                |
+| `MAX_REDIRECTS`             | Maximum website redirects to follow                              |
+| `MAX_EXTRA_PAGES`           | Maximum helpful inner pages to fetch                             |
+| `MAX_CONTENT_CHARS`         | Maximum website text sent to the model                           |
+| `LLM_TIMEOUT_SECONDS`       | Model request timeout                                            |
+| `MAX_OUTPUT_TOKENS`         | Maximum model output tokens                                      |
+| `CACHE_TTL_SECONDS`         | Analysis cache lifetime; `0` disables caching                    |
 
 Defaults and example endpoint values are provided in `.env.example`.
 
@@ -172,78 +172,98 @@ Swagger UI: http://localhost:4000/docs
 ```bash
 curl -X POST http://localhost:4000/link-analysis \
   -H "Content-Type: application/json" \
-  -d '{"url": "https://example.com"}'
+  -d '{"url": "https://scenvora.com/"}'
 ```
 
-**Response (shape - shortened)**
+**Example response (excerpt from the successful Scenvora Swagger run)**
 
-This is a shortened example of the response shape. The complete successful response captured from Swagger is available at [screenshot/response_1794988467405.json](screenshot/response_1794988467405.json).
+The excerpt below contains real values; fields are omitted for brevity. The [complete JSON response](screenshot/response_1794988467405.json) and Swagger screenshots are in the [`screenshot/`](screenshot/) folder.
 
 ```json
 {
   "success": true,
-  "website": "https://example.com/",
-  "brand": { "name": "...", "category": "...", "summary": "..." },
+  "website": "https://scenvora.com/",
+  "brand": {
+    "name": "Scenvora",
+    "category": "Fragrance & Perfumery",
+    "summary": "Scenvora is a boutique Pakistani fragrance brand specializing in small-batch, artisanal eau de parfum crafted with layered top, heart, and base notes. Offering individual scents and discovery tester kits, the brand provides accessible luxury with nationwide cash-on-delivery service."
+  },
   "analysis": {
     "competitor_analysis": {
-      "brand_overview": "...",
-      "main_category": "...",
-      "products_and_services": ["..."],
       "competitors": [
-        { "name": "...", "website": "https://...", "main_service": "...", "target_market": "...",
-          "strengths": ["..."], "weaknesses_or_gaps": ["..."], "source": "ai_suggestion" }
+        { "name": "Scents'N Stories", "source": "ai_suggestion" },
+        { "name": "J. Fragrances", "source": "ai_suggestion" },
+        { "name": "Rawaha", "source": "ai_suggestion" }
       ],
-      "competitive_advantages": ["..."],
-      "opportunities": ["..."],
-      "comparison_table": [
-        { "aspect": "Main Service", "your_brand": "...", "competitors": { "Competitor A": "..." } }
-      ],
-      "note": "Competitors are AI-generated suggestions ... not verified with live market data."
+      "note": "Competitors are AI-generated suggestions based on the website content and the model's general knowledge. They are not verified with live market data. Please check them before use."
     },
     "target_search_queries": [
-      { "query": "...", "platforms": ["Google", "LinkedIn"], "intent": "Service Search",
-        "business_relevance": "...", "target_audience": "..." }
+      { "query": "best long lasting perfume in Pakistan", "platforms": ["Google"] },
+      { "query": "perfume tester kit online Pakistan", "platforms": ["Google"] },
+      { "query": "artisan small batch eau de parfum", "platforms": ["Instagram", "Google"] },
+      { "query": "affordable luxury perfumes for women Pakistan", "platforms": ["Google", "Facebook"] },
+      { "query": "cash on delivery perfume Pakistan", "platforms": ["Google", "Facebook"] }
     ],
     "seo_improvements": {
-      "current_title": "...", "current_meta_description": "...",
-      "primary_keyword": "...", "secondary_keywords": ["..."], "long_tail_keywords": ["..."],
-      "business_keywords": ["..."], "recommended_title": "...", "title_structure": "...",
-      "meta_description": "...",
-      "supporting_content": [ { "type": "FAQ", "title": "...", "reason": "..." } ]
+      "current_title": "Scenvora — Luxury Perfume",
+      "current_meta_description": "Discover Scenvora perfumes in an immersive 3D experience.",
+      "primary_keyword": "luxury perfume Pakistan",
+      "recommended_title": "Luxury Perfume in Pakistan | Scenvora Fragrances",
+      "meta_description": "Explore Scenvora luxury perfumes in Pakistan. Discover artisanal small-batch Eau de Parfum and discovery sampler kits with convenient cash on delivery."
     },
     "top_services": [
-      { "name": "...", "description": "...", "target_industry": "...", "target_customer": "...",
-        "main_benefit": "...", "source": "website" }
+      { "name": "Handcrafted Eau de Parfum", "source": "website" },
+      { "name": "Signature Tester Discovery Kit", "source": "website" },
+      { "name": "Bespoke Scent Consultation", "source": "inferred" },
+      { "name": "Corporate & Event Fragrance Gifting", "source": "inferred" },
+      { "name": "Refill & Subscription Program", "source": "inferred" }
     ],
     "target_audience": {
-      "primary_audience": ["..."], "secondary_audience": ["..."], "industries": ["..."],
-      "business_types": ["..."], "customer_profiles": ["..."], "geographic_focus": "...",
-      "customer_needs": ["..."], "customer_challenges": ["..."], "customer_interests": ["..."],
-      "marketing_segments": [ { "audience": "Audience 1", "business_type": "...", "requirement": "..." } ]
+      "primary_audience": [
+        "Young working professionals seeking signature luxury scents",
+        "Fragrance enthusiasts interested in layered perfume notes"
+      ],
+      "geographic_focus": "Pakistan (nationwide delivery)"
     }
   },
-  "notes": ["Search volumes and rankings are not included ...", "..."],
+  "notes": [
+    "Search volumes and rankings are not included because no search-volume data source is connected.",
+    "Services marked 'inferred' are AI recommendations, not services named on the website.",
+    "Estimated cost uses standard paid list prices; actual charges depend on the provider account tier and may differ."
+  ],
   "meta": {
-    "provider": "gemini", "model": "gemini-3.8-flash",
-    "input_tokens": 0, "output_tokens": 0, "estimated_cost_usd": 0.0, "llm_calls": 1,
-    "llm_time_seconds": 0.0, "total_time_seconds": 0.0,
-    "pages_analyzed": ["https://example.com/", "https://example.com/about"],
-    "content_characters_sent": 0, "cached": false
+    "provider": "gemini",
+    "model": "gemini-3.8-flash",
+    "input_tokens": 2085,
+    "output_tokens": 3993,
+    "estimated_cost_usd": 0.016538,
+    "llm_calls": 1,
+    "llm_time_seconds": 35.57,
+    "total_time_seconds": 59.666,
+    "pages_analyzed": [
+      "https://scenvora.com/",
+      "https://scenvora.com/products?sort=newest",
+      "https://scenvora.com/products?family=Floral%20Fruity"
+    ],
+    "content_characters_sent": 3882,
+    "cached": false
   }
 }
 ```
 
+The Scenvora response above is a separate example run from the five-site pilot measurements in Section 6; token counts, cost, and timing can vary between runs. Recommendations marked `inferred` and AI-suggested competitor claims should be verified before use.
+
 **Error responses** (always the same shape)
 
-| Case | HTTP status | `error.code` |
-|---|---|---|
-| Bad URL (for example `ftp://...`) | 400 | `invalid_url` |
-| Private / internal address (SSRF) | 400 | `blocked_url` |
-| Missing `url` in body | 422 | `invalid_request` |
-| Website has almost no text (JavaScript-only site) | 422 | `not_enough_content` |
-| Website down, timeout, or blocks bots | 502 | `website_unreachable` |
-| LLM failed or returned bad JSON 2 times | 502 | `llm_error` |
-| API key missing | 500 | `llm_not_configured` |
+| Case                                              | HTTP status | `error.code`          |
+| ------------------------------------------------- | ----------- | --------------------- |
+| Bad URL (for example `ftp://...`)                 | 400         | `invalid_url`         |
+| Private / internal address (SSRF)                 | 400         | `blocked_url`         |
+| Missing `url` in body                             | 422         | `invalid_request`     |
+| Website has almost no text (JavaScript-only site) | 422         | `not_enough_content`  |
+| Website down, timeout, or blocks bots             | 502         | `website_unreachable` |
+| LLM failed or returned bad JSON 2 times           | 502         | `llm_error`           |
+| API key missing                                   | 500         | `llm_not_configured`  |
 
 ```json
 { "success": false, "error": { "code": "blocked_url", "message": "This URL points to a private or internal network address..." } }
@@ -280,11 +300,11 @@ Prices and model details below were checked against provider documentation on **
 
 ### A. Comparison
 
-| Provider / model | Input / 1M | Output / 1M | Context | Speed information | JSON capability | Accuracy evidence / fit | Availability / access |
-|---|---|---|---|---|---|---|---|
-| Google `gemini-3.8-flash` | $0.75 through Dec 31, 2026 | $3.75 through Dec 31, 2026 | 1,048,576 tokens | Flash model; provider describes it as speed- and cost-efficient. Cross-provider latency not measured. | Structured outputs supported; this app requests JSON MIME type and validates with Pydantic. | No independent accuracy benchmark. **Selected for this project** because Gemini is configured and has a large context window. | Gemini free-tier access may be available; quotas and eligibility apply. |
-| Anthropic `claude-haiku-5-5` | $0.10 up to 100K input tokens; $0.50 above | $0.50 up to 100K input tokens; $2.50 above | 1M tokens | Anthropic describes it as its fastest current model. | Provider structured-output support exists; this app currently uses prompted JSON and Pydantic validation. | No independent accuracy benchmark. Potential lower-cost option if an Anthropic key is added and tested. | Paid API key required; none configured here. |
-| OpenAI `gpt-5.4-mini` | $0.75 | $4.50 | 400K tokens; 272K maximum input | OpenAI describes it as faster and efficient for high-volume workloads. Cross-provider latency not measured. | Structured outputs supported; this app's adapter uses JSON response mode. | No independent accuracy benchmark. | Paid API key required; not configured here. |
+| Provider / model             | Input / 1M                                 | Output / 1M                                | Context                         | Speed information                                                                                           | JSON capability                                                                                           | Accuracy evidence / fit                                                                                                       | Availability / access                                                   |
+| ---------------------------- | ------------------------------------------ | ------------------------------------------ | ------------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Google `gemini-3.8-flash`    | $0.75 through Dec 31, 2026                 | $3.75 through Dec 31, 2026                 | 1,048,576 tokens                | Flash model; provider describes it as speed- and cost-efficient. Cross-provider latency not measured.       | Structured outputs supported; this app requests JSON MIME type and validates with Pydantic.               | No independent accuracy benchmark. **Selected for this project** because Gemini is configured and has a large context window. | Gemini free-tier access may be available; quotas and eligibility apply. |
+| Anthropic `claude-haiku-5-5` | $0.10 up to 100K input tokens; $0.50 above | $0.50 up to 100K input tokens; $2.50 above | 1M tokens                       | Anthropic describes it as its fastest current model.                                                        | Provider structured-output support exists; this app currently uses prompted JSON and Pydantic validation. | No independent accuracy benchmark. Potential lower-cost option if an Anthropic key is added and tested.                       | Paid API key required; none configured here.                            |
+| OpenAI `gpt-5.4-mini`        | $0.75                                      | $4.50                                      | 400K tokens; 272K maximum input | OpenAI describes it as faster and efficient for high-volume workloads. Cross-provider latency not measured. | Structured outputs supported; this app's adapter uses JSON response mode.                                 | No independent accuracy benchmark.                                                                                            | Paid API key required; not configured here.                             |
 
 Model capabilities and provider descriptions are not a substitute for application-specific accuracy or latency benchmarks. Model capacity and rate limits may vary; no model is guaranteed to avoid temporary overload.
 
@@ -292,54 +312,54 @@ Model capabilities and provider descriptions are not a substitute for applicatio
 
 On 18 November 2026, a sequential Gemini 3.8 Flash pilot analyzed five public websites. All five requests succeeded in one LLM call and returned exactly five services and five search queries. Mean LLM time was **39.504 seconds** and mean total time was **47.700 seconds**. Paid-tier estimates below are not invoices.
 
-| Website | Input / output tokens | LLM / total seconds | Estimated paid cost |
-|---|---:|---:|---:|
-| Scenvora | 2,096 / 4,455 | 41.710 / 66.774 | $0.018278 |
-| Python.org | 3,639 / 4,139 | 34.711 / 38.509 | $0.018250 |
-| Mozilla.org | 3,073 / 4,281 | 37.230 / 42.715 | $0.018358 |
-| Shopify.com | 3,248 / 4,934 | 42.541 / 46.173 | $0.020938 |
-| IKEA.com | 1,494 / 5,076 | 41.330 / 44.327 | $0.020155 |
+| Website     | Input / output tokens | LLM / total seconds | Estimated paid cost |
+| ----------- | --------------------: | ------------------: | ------------------: |
+| Scenvora    |         2,096 / 4,455 |     41.710 / 66.774 |           $0.018278 |
+| Python.org  |         3,639 / 4,139 |     34.711 / 38.509 |           $0.018250 |
+| Mozilla.org |         3,073 / 4,281 |     37.230 / 42.715 |           $0.018358 |
+| Shopify.com |         3,248 / 4,934 |     42.541 / 46.173 |           $0.020938 |
+| IKEA.com    |         1,494 / 5,076 |     41.330 / 44.327 |           $0.020155 |
 
-| Website | Expected brand label | Returned brand | Match |
-|---|---|---|---|
-| Scenvora | Scenvora | Scenvora | Pass |
-| Python.org | Python Software Foundation | Python Software Foundation | Pass |
-| Mozilla.org | Mozilla | Mozilla | Pass |
-| Shopify.com | Shopify | Shopify | Pass |
-| IKEA.com | IKEA | IKEA | Pass |
+| Website     | Expected brand label       | Returned brand             | Match |
+| ----------- | -------------------------- | -------------------------- | ----- |
+| Scenvora    | Scenvora                   | Scenvora                   | Pass  |
+| Python.org  | Python Software Foundation | Python Software Foundation | Pass  |
+| Mozilla.org | Mozilla                    | Mozilla                    | Pass  |
+| Shopify.com | Shopify                    | Shopify                    | Pass  |
+| IKEA.com    | IKEA                       | IKEA                       | Pass  |
 
 This is a narrow manual smoke check: **5/5 brand labels matched**, and **5/5 responses** passed the exact-five services and exact-five queries requirements. Only Scenvora's service sources were spot-checked: two website offerings and three recommendations marked `inferred`. Competitor, SEO, audience, and the other service claims still require human verification. This is **not** a comprehensive accuracy benchmark; no labeled multi-site factual-accuracy benchmark has been run.
 
 The cross-provider cost estimates below apply the Scenvora Gemini token counts (2,096 input, 4,455 output) to each model's listed rates. They are illustrative because providers tokenize the same prompt differently.
 
-| Model | Cost per analysis (estimate) | Cost per 1,000 analyses |
-|---|---|---|
-| Gemini 3.8 Flash, standard paid tier | $0.018278 | $18.28 |
-| Claude Haiku 5.5 (prompt under 100K tokens) | $0.002437 | $2.44 |
-| GPT-5.4 mini | $0.021620 | $21.62 |
+| Model                                       | Cost per analysis (estimate) | Cost per 1,000 analyses |
+| ------------------------------------------- | ---------------------------- | ----------------------- |
+| Gemini 3.8 Flash, standard paid tier        | $0.018278                    | $18.28                  |
+| Claude Haiku 5.5 (prompt under 100K tokens) | $0.002437                    | $2.44                   |
+| GPT-5.4 mini                                | $0.021620                    | $21.62                  |
 
 These are list-price estimates, not measured invoices. `meta.estimated_cost_usd` uses configured standard paid-tier prices; Gemini free-tier usage may have no token charge while it remains within the account's free quota. The app cannot determine the account's tier. Gemini's published standard rates for this model are scheduled to change on **1 January 2027**, so re-check prices before then.
 
 ### C. Measured vs estimated
 
-| Measure | Evidence |
-|---|---|
-| Prices | Provider documentation checked 18 Nov 2026; listed paid-tier prices can change. |
-| Token counts | Measured for five Gemini website requests above. Other providers' token counts were not measured and may differ. |
-| Response time | Five Gemini requests averaged 39.504 s LLM time and 47.700 s total; this is a small pilot, not a long-term or cross-provider benchmark. |
-| Cost | Recalculated from measured Gemini tokens using standard paid-tier prices; not invoices. |
-| Accuracy | Manual pilot check: 5/5 brand labels matched and 5/5 responses passed schema/count checks. Other semantic claims were not comprehensively scored; **no formal factual-accuracy benchmark** against a labeled multi-site test set has been run. |
+| Measure       | Evidence                                                                                                                                                                                                                                       |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Prices        | Provider documentation checked 18 Nov 2026; listed paid-tier prices can change.                                                                                                                                                                |
+| Token counts  | Measured for five Gemini website requests above. Other providers' token counts were not measured and may differ.                                                                                                                               |
+| Response time | Five Gemini requests averaged 39.504 s LLM time and 47.700 s total; this is a small pilot, not a long-term or cross-provider benchmark.                                                                                                        |
+| Cost          | Recalculated from measured Gemini tokens using standard paid-tier prices; not invoices.                                                                                                                                                        |
+| Accuracy      | Manual pilot check: 5/5 brand labels matched and 5/5 responses passed schema/count checks. Other semantic claims were not comprehensively scored; **no formal factual-accuracy benchmark** against a labeled multi-site test set has been run. |
 
 ### D. Final Recommendation
 
-| Item | Answer |
-|---|---|
-| Recommended provider | Google Gemini API |
-| Recommended model | `gemini-3.8-flash` |
-| Observed token usage | 2,096 input and 4,455 output tokens for one Scenvora run; not a universal average |
-| Estimated paid-tier cost | $0.018278 for that observed run; free-tier eligibility can change the actual charge |
-| Observed response time | 41.710 s LLM time and 66.774 s total for Scenvora; five-site pilot means were 39.504 s and 47.700 s |
-| Fallback model | None configured. Claude requires an Anthropic key; the current setup uses Gemini only. |
+| Item                     | Answer                                                                                              |
+| ------------------------ | --------------------------------------------------------------------------------------------------- |
+| Recommended provider     | Google Gemini API                                                                                   |
+| Recommended model        | `gemini-3.8-flash`                                                                                  |
+| Observed token usage     | 2,096 input and 4,455 output tokens for one Scenvora run; not a universal average                   |
+| Estimated paid-tier cost | $0.018278 for that observed run; free-tier eligibility can change the actual charge                 |
+| Observed response time   | 41.710 s LLM time and 66.774 s total for Scenvora; five-site pilot means were 39.504 s and 47.700 s |
+| Fallback model           | None configured. Claude requires an Anthropic key; the current setup uses Gemini only.              |
 
 **Why `gemini-3.8-flash`?**
 
@@ -356,18 +376,18 @@ Claude Haiku 5.5 is a lower-cost candidate at this request size, but it is not c
 
 ### E. Cost Optimization (what this project does)
 
-| Idea | Done in code |
-|---|---|
-| Remove scripts, styles, SVG, forms, duplicate lines | Yes - `website_extractor.py` |
-| Limit content size (12,000 characters) | Yes - `MAX_CONTENT_CHARS` |
-| Only 2 extra pages, chosen by keyword score | Yes - `pick_extra_pages()` |
-| One LLM call for all 5 sections (not 5 calls) | Yes - system prompt is shared |
-| Short, fixed system prompt | Yes |
-| Cache results for 1 hour | Yes - `TTLCache` |
-| Retry only on temporary errors (429, 5xx, timeout) | Yes |
-| Fix broken JSON with max 1 extra call | Yes |
+| Idea                                                          | Done in code                                      |
+| ------------------------------------------------------------- | ------------------------------------------------- |
+| Remove scripts, styles, SVG, forms, duplicate lines           | Yes - `website_extractor.py`                      |
+| Limit content size (12,000 characters)                        | Yes - `MAX_CONTENT_CHARS`                         |
+| Only 2 extra pages, chosen by keyword score                   | Yes - `pick_extra_pages()`                        |
+| One LLM call for all 5 sections (not 5 calls)                 | Yes - system prompt is shared                     |
+| Short, fixed system prompt                                    | Yes                                               |
+| Cache results for 1 hour                                      | Yes - `TTLCache`                                  |
+| Retry only on temporary errors (429, 5xx, timeout)            | Yes                                               |
+| Fix broken JSON with max 1 extra call                         | Yes                                               |
 | Require exactly 5 services and label inferred recommendations | Yes - Pydantic validation and the analysis prompt |
-| Easy switch to a smaller model | Yes - `.env` only |
+| Easy switch to a smaller model                                | Yes - `.env` only                                 |
 
 **More ideas for production:** use Redis instead of memory cache; use the provider's **prompt caching** for the fixed system prompt; use a provider's **Batch API** for jobs that do not need an instant answer; use a small model only for extraction and a bigger one for competitors.
 
@@ -402,11 +422,11 @@ Claude Haiku 5.5 is a lower-cost candidate at this request size, but it is not c
 
 Evidence from a local run is saved in [`screenshot/`](screenshot/):
 
-| File | Evidence |
-|---|---|
-| [01-test-passed.png](screenshot/01-test-passed.png) | Automated tests passed |
-| [02-api-logs.png](screenshot/02-api-logs.png) | API server logs |
-| [03-request-swaager.png](screenshot/03-request-swaager.png) | Swagger request |
+| File                                                                                                                                | Evidence                                              |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| [01-test-passed.png](screenshot/01-test-passed.png)                                                                                 | Automated tests passed                                |
+| [02-api-logs.png](screenshot/02-api-logs.png)                                                                                       | API server logs                                       |
+| [03-request-swaager.png](screenshot/03-request-swaager.png)                                                                         | Swagger request                                       |
 | [04.1-resposne-swagger.png](screenshot/04.1-resposne-swagger.png)–[04.6-resposne-swagger.png](screenshot/04.6-resposne-swagger.png) | Successful Swagger response, split across screenshots |
-| [05-linkvalidation-error.png](screenshot/05-linkvalidation-error.png) | URL validation error response |
-| [response_1794988467405.json](screenshot/response_1794988467405.json) | Complete successful response in JSON format |
+| [05-linkvalidation-error.png](screenshot/05-linkvalidation-error.png)                                                               | URL validation error response                         |
+| [response_1794988467405.json](screenshot/response_1794988467405.json)                                                               | Complete successful response in JSON format           |

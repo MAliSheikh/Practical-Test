@@ -40,13 +40,13 @@ If one platform fails, the others still post. Every platform returns its own res
 
 ## Platforms Used
 
-| # | Platform | What is posted | Official API docs |
-|---|---|---|---|
-| 1 | Facebook (Page) | Text post on a Page feed | https://developers.facebook.com/docs/pages-api/posts |
-| 2 | Instagram | Image post with the message as caption | https://developers.facebook.com/docs/instagram-platform/content-publishing |
-| 3 | Threads | Text post | https://developers.facebook.com/docs/threads/posting |
-| 4 | Dev.to | Published article (message is the body) | https://developers.forem.com/api/v1 |
-| 5 | Bluesky | Text post with a clickable link | https://docs.bsky.app/docs/api/com-atproto-repo-create-record |
+| #   | Platform        | What is posted                          | Official API docs                                                          |
+| --- | --------------- | --------------------------------------- | -------------------------------------------------------------------------- |
+| 1   | Facebook (Page) | Text post on a Page feed                | https://developers.facebook.com/docs/pages-api/posts                       |
+| 2   | Instagram       | Image post with the message as caption  | https://developers.facebook.com/docs/instagram-platform/content-publishing |
+| 3   | Threads         | Text post                               | https://developers.facebook.com/docs/threads/posting                       |
+| 4   | Dev.to          | Published article (message is the body) | https://developers.forem.com/api/v1                                        |
+| 5   | Bluesky         | Text post with a clickable link         | https://docs.bsky.app/docs/api/com-atproto-repo-create-record              |
 
 ---
 
@@ -127,20 +127,20 @@ pip install -r requirements.txt
 
 ## Environment Variables
 
-| Variable | Used by | Description |
-|---|---|---|
-| `FB_GRAPH_API_URL` | Facebook, Instagram | Meta Graph API base URL |
-| `FB_PAGE_ID` | Facebook | ID of your Facebook Page |
-| `FB_PAGE_ACCESS_TOKEN` | Facebook, Instagram | **Page** access token (not the user token) |
-| `IG_USER_ID` | Instagram | Instagram Business account ID linked to the Page |
-| `IG_IMAGE_URL` | Instagram | Public direct link to a JPG image |
-| `THREADS_GRAPH_API_URL` | Threads | Threads Graph API base URL |
-| `THREADS_ACCESS_TOKEN` | Threads | Long-lived Threads access token |
-| `DEVTO_API_URL` | Dev.to | Articles API endpoint |
-| `DEVTO_API_KEY` | Dev.to | API key from Dev.to settings |
-| `BLUESKY_API_URL` | Bluesky | Bluesky XRPC API base URL |
-| `BLUESKY_HANDLE` | Bluesky | Your handle, e.g. `name.bsky.social` |
-| `BLUESKY_APP_PASSWORD` | Bluesky | App password (not your normal password) |
+| Variable                | Used by             | Description                                      |
+| ----------------------- | ------------------- | ------------------------------------------------ |
+| `FB_GRAPH_API_URL`      | Facebook, Instagram | Meta Graph API base URL                          |
+| `FB_PAGE_ID`            | Facebook            | ID of your Facebook Page                         |
+| `FB_PAGE_ACCESS_TOKEN`  | Facebook, Instagram | **Page** access token (not the user token)       |
+| `IG_USER_ID`            | Instagram           | Instagram Business account ID linked to the Page |
+| `IG_IMAGE_URL`          | Instagram           | Public direct link to a JPG image                |
+| `THREADS_GRAPH_API_URL` | Threads             | Threads Graph API base URL                       |
+| `THREADS_ACCESS_TOKEN`  | Threads             | Long-lived Threads access token                  |
+| `DEVTO_API_URL`         | Dev.to              | Articles API endpoint                            |
+| `DEVTO_API_KEY`         | Dev.to              | API key from Dev.to settings                     |
+| `BLUESKY_API_URL`       | Bluesky             | Bluesky XRPC API base URL                        |
+| `BLUESKY_HANDLE`        | Bluesky             | Your handle, e.g. `name.bsky.social`             |
+| `BLUESKY_APP_PASSWORD`  | Bluesky             | App password (not your normal password)          |
 
 Example `.env.example`:
 
@@ -333,13 +333,13 @@ Response:
 
 ### Validation rules
 
-| Input | Result |
-|---|---|
-| No link | 422 |
-| Two or more links | 422 |
-| Invalid URL (e.g. `https://nodot`) | 422 |
-| More than 200 characters | 422 |
-| Empty message | 422 |
+| Input                              | Result |
+| ---------------------------------- | ------ |
+| No link                            | 422    |
+| Two or more links                  | 422    |
+| Invalid URL (e.g. `https://nodot`) | 422    |
+| More than 200 characters           | 422    |
+| Empty message                      | 422    |
 
 ---
 
